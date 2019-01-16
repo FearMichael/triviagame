@@ -13,21 +13,18 @@
   <body>
 <!-- Gameboard Area -->
 <div class="row">
-    <!-- <div class="col l8"> -->
-<!-- <div class="blue lighten-1 white-text"> -->
     <!-- Title -->
-    <!-- <div class="row"> -->
-        <div class="col l8 blue lighten-1 center-align white-text">
+        <div class="col l8 s12 gameStyle lighten-1 center-align white-text fullView">
             <h1>Trivia Time!</h1>
+                <!-- <div> -->
+                    <h4 class="container timerStyle"><i class="small material-icons">access_alarm </i> Time Left: <span id="timer"></span></h4>  
+                <!-- </div> -->
         <!-- Question area -->
-    <div class="purple lighten-2 center-align" id="questionArea">
-        <h2 id="question">Select your category</h2>
+    <div class="questionStyle col l8 s12 offset-l2 container lighten-2 center-align" id="questionArea">
+        <h2 id="question" class="paddingAll-2">Select your category</h2>
     </div>
-        
     <!-- Answer Area -->
     <div class="container center-align white-text" id="answerArea">
-        <!-- <div class="row">
-            <div class="col l8 s12"> -->
                 <img src="https://media.giphy.com/media/5oGIdt1xapQ76/giphy.gif" id="winPic">
                 <img src="https://media.giphy.com/media/Uyl1VRmBCPir6/giphy.gif" id="losePic">
                 <div class="input-field col s12 whiteForm" id="triviaSelect">
@@ -41,50 +38,36 @@
                         </select>
                         <label>Select your trivia category</label>
                 </div>
-                <div class="winLossHide">
-                    <button class="btn col l6 s12 answers" id="answer1"></button>
-                    <button class="btn col l6 s12 answers" id="answer2"></button>
+                <div class="row"> 
+                    <div class="winLossHide">
+                    <button class="btn col l5 s12 answers answerButton" id="answer1"></button>
+                    <button class="btn col l5 s12 answers answerButton" id="answer2"></button>
+                    <button class="btn col l5 s12 answers answerButton" id="answer3"></button>
+                    <button class="btn col l5 s12 answers answerButton" id="answer4"></button>
                 </div>
-                <div class="winLossHide">
-                    <button class="btn col l6 s12 answers" id="answer3"></button>
-                    <button class="btn col l6 s12 answers" id="answer4"></button>
                 </div>
+                
                 <div class="center">
                     <div class="center-align">
                         <button class="btn btn-large col l4 s6 offset-l4 offset-s3" id="checkAnswer"><i class="material-icons left">check</i>Check Answer!</button>
-                        <!-- <button class="btn btn-large col l4 s6 offset-l4 offset-s3" id="nextQuestion"><i class="material-icons right">arrow_forward</i>Next Question!</button>   -->
                     </div>
                 </div>
-            <!-- </div>
-        </div> -->
     </div>
-<!-- </div> -->
         </div>
-        <div class="col l4 grey white-text">
+        <div class="col l4 s12 resultStyle white-text center-align fullView">
             <div class="row">
-                <div class="col l12 red">
-                    <div class="center-align"> 
-                        <div class="red">
-                            <h4>Time Left: <span id="timer"></span></h4>  
-                        </div>
-                    </div>
-                </div>
-                <div class="col l6">
+                <div class="col l6 s12">
                     <h4>Wrong: <span id="wrongCount"></span></h4>
                     <p id="wrongAnswerArea"></p>
                 </div>
-                <div class="col l6">
+                <div class="col l6 s12">
                     <h4>Correct: <span id="correctCount"></span></h4>
                     <p id="correctAnswerArea"></p>
                 </div>      
             </div>
                       
         </div>
-    <!-- </div>    -->
-    <!-- </div> -->
-
 </div>
-
    <!--JavaScript at end of body for optimized loading-->
    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>

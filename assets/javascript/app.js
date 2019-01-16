@@ -1,6 +1,6 @@
 // Declare variables
 var queryUrl = "https://opentdb.com/api.php?amount=10&category=26&difficulty=medium&type=multiple"
-var selectedAnswer;
+var selectedAnswer = "";
 var triviaQuestionCount = 0;
 var correctAnswer;
 var trivia;
@@ -32,20 +32,9 @@ var triviaOptions = $("#triviaSelect");
 //Materialize initialization
   M.AutoInit();
 
-// Question and answers as JSON
-function getInfo() {
- $.ajax({
-    url: queryUrl,
-    method: "GET"
-  }).then(function(info) {
-      trivia = info;
-      createTrivia();
-  });   
-}
-
-
 //Set Question/Answers
 function createTrivia() {
+    // console.log("Making trivia");
 //Shuffles the answer array randomly
         function shuffle(a) {
             var j, x, i;
@@ -57,7 +46,8 @@ function createTrivia() {
             };
             return a;
     };
-  var questionNumber = triviaQuestionCount + 1
+  var questionNumber = triviaQuestionCount + 1;
+  if (triviaQuestionCount <= 9) {
   correctAnswer = trivia.results[triviaQuestionCount].correct_answer;
   answers = trivia.results[triviaQuestionCount].incorrect_answers;
   answers.push(trivia.results[triviaQuestionCount].correct_answer);
@@ -68,19 +58,37 @@ function createTrivia() {
   answer3.html(answers[2]);
   answer4.html(answers[3]);
   timer();
-  console.log(correctAnswer);
+//   console.log(correctAnswer);
   triviaOptions.hide();
   winLossHide.show();
+  }
 };
-  
-//Select Category
-// Gen knowledge: https://opentdb.com/api.php?amount=10&category=9&difficulty=medium&type=multiple
-//Books https://opentdb.com/api.php?amount=10&category=10&difficulty=medium&type=multiple
-//Video Games https://opentdb.com/api.php?amount=10&category=15&difficulty=medium&type=multiple
-// computer science https://opentdb.com/api.php?amount=10&category=18&difficulty=medium&type=multiple
-// television https://opentdb.com/api.php?amount=10&category=14&difficulty=medium&type=multiple
 
-$("#triviaSelect select").on("change", function(event) {
+
+// Question and answers as JSON
+function getInfo() {
+ $.ajax({
+    url: queryUrl,
+    method: "GET"
+  }).then(function(info) {
+    //   console.log("Getting Info");
+      trivia = info;
+      createTrivia();
+  });   
+};
+
+$(document).on("change", "#triviaSelect select", function(event) {
+    selectedAnswer;
+    triviaQuestionCount = 0;
+    correctAnswer;
+    trivia;
+    answers = [];
+    correct = 0;
+    wrong = 0;
+    interval;
+    // console.log(event);
+    // console.log(this);
+    // console.log(this.value);
     var value = this.value
     switch(value) {
         //gen knowledge
@@ -105,8 +113,8 @@ $("#triviaSelect select").on("change", function(event) {
         break;
     }
     getInfo();
+    checkAnswer.show();
 });
-
 
 // Timer for questions
 function timer() {
@@ -131,13 +139,19 @@ function timer() {
     },1000);
   };
 
+  //Record the answer input
+answerButton.on("click", function(event) {
+    selectedAnswer = $(this).text();
+});
+
   //Game end function
   function gameEnd() {
-      if (triviaQuestionCount === 9) {
+      if (triviaQuestionCount > 9) {
         triviaOptions.show();
         winLossHide.hide();
         clearInterval(interval);
-        question.html("Want to play again? Select your next category!")
+        question.html("Want to play again? Select your next category!");
+        checkAnswer.hide();
       }
   }
 
@@ -187,7 +201,7 @@ function showWrongPic() {
       else if (selectedAnswer == correctAnswer)
       {
           correct ++;
-          correctAnswerArea.append("<p>" + trivia.results[triviaQuestionCount].question + "<br/>" + trivia.results[triviaQuestionCount].correct_answer);
+          correctAnswerArea.append("<p>Q: " + trivia.results[triviaQuestionCount].question + "<br/>A: " + trivia.results[triviaQuestionCount].correct_answer);
           correctCount.text(correct);
           nextQuestion.show();
           triviaQuestionCount++;
@@ -198,7 +212,7 @@ function showWrongPic() {
       else if (selectedAnswer != correctAnswer) 
       {
           wrong++;
-          wrongAnswerArea.append("<p>" + trivia.results[triviaQuestionCount].question + "<br/>" + trivia.results[triviaQuestionCount].correct_answer);
+          wrongAnswerArea.append("<p>Q: " + trivia.results[triviaQuestionCount].question + "<br/>A: " + trivia.results[triviaQuestionCount].correct_answer);
           wrongCount.text(wrong);
           nextQuestion.show();
           triviaQuestionCount++;
@@ -221,22 +235,18 @@ function nextQuestionFunc() {
 // nextQuestion.on("click", function(event){
 //     nextQuestionFunc();
 // });
-//Record the answer input
-answerButton.on("click", function(event) {
-    selectedAnswer = $(this).text();
-});
+
 
 // Logic to figure out if answer is right or wrong
 checkAnswer.on("click", function(event) {
     if (selectedAnswer === "") {
 //Do nothing if no answer is selected
-    } else {
-    checkAnswer.attr("disabled", "true");
+    } 
+    else {
+    checkAnswer.attr("disabled", "true"); //Prevents from repeated clicks and false "wrongs"
     checkInput();
     setTimeout(function() {
-        checkAnswer.removeAttr("disabled"); //Prevents from repeated clicks and false "wrongs"
+        checkAnswer.removeAttr("disabled"); //Button can be used again
     }, 1000 * 4);
     }
-    
-
 });
