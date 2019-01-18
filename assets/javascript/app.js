@@ -141,7 +141,7 @@ function timer() {
 
   //Record the answer input
 answerButton.on("click", function(event) {
-    selectedAnswer = $(this).html();
+    selectedAnswer = $(this).text();
 });
 
   //Game end function
@@ -153,8 +153,6 @@ answerButton.on("click", function(event) {
         timerPlace.text("");
         question.html("Want to play again? Select your next category!");
         checkAnswer.hide();
-        wrongAnswerArea.empty();
-        correctAnswerArea.empty();
       }
   }
 
@@ -201,7 +199,7 @@ function showWrongPic() {
       if (selectedAnswer == "") {
 
       }
-      else if (selectedAnswer.replace(/[^a-z0-9\s]/gi, '') == correctAnswer.replace(/[^a-z0-9\s]/gi, ''))
+      else if (selectedAnswer == $("<div>").html(correctAnswer).text())
       {
           console.log("Selected: " + selectedAnswer.replace(/[^a-z0-9\s]/gi, ''));
           console.log("Correct: " + correctAnswer.replace(/[^a-z0-9\s]/gi, ''));
@@ -214,7 +212,7 @@ function showWrongPic() {
           clearInterval(interval);
 
       } 
-      else if (selectedAnswer.replace(/[^a-z0-9\s]/gi, '') != correctAnswer.replace(/[^a-z0-9\s]/gi, '')) 
+      else if (selectedAnswer != $("<div>").html(correctAnswer).text()) 
       {
         console.log("Selected: " + selectedAnswer.replace(/[^a-z0-9\s]/gi, ''));
         console.log("Correct: " + correctAnswer.replace(/[^a-z0-9\s]/gi, ''));
