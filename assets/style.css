@@ -1,13 +1,9 @@
-/* body {
-    background: url(../assets/images/trivia-bg.jpg) no-repeat center center fixed;
-} */
-
 #nextQuestion {
     display: none;
 }
 #checkAnswer {
     display: none;
-    background-color: rgba(237, 25, 135);
+    background-color: rgb(237, 25, 135);
 }
 
 #winPic {
@@ -18,7 +14,7 @@
 }
 
 .timerStyle {
-    background-color: rgba(237, 25, 135);
+    background-color: rgb(237, 25, 135);
     padding: 15px;
 }
 
@@ -39,9 +35,6 @@
     margin: 8px;
     background-color: rgb(98, 195, 112);
 }
-/* #triviaSelect {
-    display: none;
-} */
 
 .winLossHide {
     display: none;
@@ -63,7 +56,16 @@ input {
  padding: 10px;
 }
 
-.fullView {
-    height: 100vh;
-    /* overflow: scroll; */
-}
+@media only screen and (min-width: 992px) {
+    .fullView {
+        height: 100vh;
+        overflow: scroll;
+    }
+  }
+
+  @media only screen and (max-width: 599px) {
+    #checkAnswer {
+        margin-bottom: 2em;
+        width: 70%;
+    }
+  }
