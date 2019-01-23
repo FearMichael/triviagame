@@ -68,4 +68,7 @@ input {
         margin-bottom: 2em;
         width: 70%;
     }
+    .btn {
+        overflow-wrap: break-word;
+    }
   }
