@@ -114,6 +114,8 @@ $(document).on("change", "#triviaSelect select", function(event) {
     }
     getInfo();
     checkAnswer.show();
+    wrongAnswerArea.empty();
+    correctAnswerArea.empty();
 });
 
 // Timer for questions
