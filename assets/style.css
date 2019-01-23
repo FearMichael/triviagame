@@ -23,7 +23,7 @@
 }
 
 .resultStyle {
-    background-color: rgba(98, 195, 112);
+    background-color: rgb(98, 195, 112);
 }
 
 .gameStyle {
@@ -37,7 +37,7 @@
 
 .answerButton {
     margin: 8px;
-    background-color: rgba(98, 195, 112);
+    background-color: rgb(98, 195, 112);
 }
 /* #triviaSelect {
     display: none;
