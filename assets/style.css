@@ -32,8 +32,9 @@
 }
 
 .answerButton {
-    margin: 8px;
+    margin: 0.25rem 0;
     background-color: rgb(98, 195, 112);
+    width: 100%;
 }
 
 .winLossHide {
